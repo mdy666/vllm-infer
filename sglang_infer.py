@@ -62,7 +62,6 @@ if __name__ == '__main__':
         else:
             import sglang as sgl
             llm = sgl.Engine(model_path=args.model_path, tp_size=args.tp_size)
-            llm.generate
             sampling_params = {"temperature": args.temperature, "top_p": args.top_p, 'max_new_tokens':args.max_new_tokens}
             def process_responses(responses):
                 outputs = []
@@ -75,10 +74,7 @@ if __name__ == '__main__':
         def __init__(self):
             self.base_prompt = BASE_PROMPT
             self.tokenizer = AutoTokenizer.from_pretrained(args.model_path)
-            self.is_init = False
-            self.core = args.core
-            self.args = args
-            self.llm, self.sampling_params, self.process_responses = helpers(self.args)
+            self.llm, self.sampling_params, self.process_responses = helpers(args)
             
         def __call__(self, batch):
             print('='*100)
