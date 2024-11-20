@@ -87,14 +87,7 @@ if __name__ == '__main__':
                 prompt = self.tokenizer.apply_chat_template([prompt], tokenize=False, add_generation_prompt=True)
                 input_texts.append(prompt)
                 raw_questions.append(questions[i])
-            if self.core == 'sglang':
-                # pbar = tqdm(total=len(input_texts))
-                pbar = None
-                print(input_texts[0])
-                responses = self.llm.generate(input_texts, self.sampling_params)
-                print('*'*100)
-            else:
-                responses = self.llm.generate(input_texts, self.sampling_params)
+            responses = self.llm.generate(input_texts, self.sampling_params)
             outputs = self.process_responses(responses)
             return {'raw_question': raw_questions, 'answer': outputs}
     
